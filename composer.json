@@ -1,0 +1,11 @@
+{
+    "minimum-stability": "dev",
+    "require": {
+        "vrana/notorm": "@dev"
+    },
+    "autoload": {
+        "psr-0" : {
+            "": ["src/", "tests/"]
+        }
+    }
+}
