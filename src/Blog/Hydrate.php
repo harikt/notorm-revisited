@@ -1,4 +1,6 @@
 <?php
+namespace Blog;
+
 class Hydrate
 {
     public static function set($object, $property, $value)

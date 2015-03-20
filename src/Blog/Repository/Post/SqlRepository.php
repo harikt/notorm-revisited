@@ -2,6 +2,7 @@
 namespace Blog\Repository\Post;
 
 use NotORM;
+use Blog\Hydrate;
 
 class SqlRepository implements PostRepository
 {
@@ -35,7 +36,7 @@ class SqlRepository implements PostRepository
             'source_id' => $post->getSource()->getId(),
         );
         $row = $this->db->article()->insert($data);
-        \Hydrate::set($post, 'id', $row['id']);
+        Hydrate::set($post, 'id', $row['id']);
     }
 
     protected function update($post)
