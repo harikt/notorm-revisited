@@ -3,6 +3,9 @@ namespace Blog\Repository\Post;
 
 use NotORM;
 use Blog\Hydrate;
+use Blog\Author;
+use Blog\Post;
+use Blog\Tag;
 
 class SqlRepository implements PostRepository
 {
@@ -19,7 +22,7 @@ class SqlRepository implements PostRepository
         return $this->buildPost($article);
     }
 
-    public function save(\Post $post)
+    public function save(Post $post)
     {
         if ($post->getId() > 0) {
             $this->update($post);
@@ -66,8 +69,7 @@ class SqlRepository implements PostRepository
     public function findAll()
     {
         $articles = $this->db->article()
-            // ->limit(100)
-            ->where('id', array(62, 66, 67, 69, 90))
+            ->limit(100)
             ;
         $posts = array();
         foreach ($articles as $article) {
@@ -78,11 +80,10 @@ class SqlRepository implements PostRepository
 
     protected function buildPost($article)
     {
-        $source = new \Source($article->source['name'], $article->source['id']);
         $tags = array();
         foreach ($article->article_tag() as $atag) {
-            $tags[] = new \Tag($atag->tag['name'], $atag->tag['id']);
+            $tags[] = new Tag($atag->tag['name'], $atag->tag['id']);
         }
-        return new \Post($article['title'], $article['body'], $source, $tags, $article['id']);
+        return new Post($article['title'], $article['body'], $tags, $article['id']);
     }
 }

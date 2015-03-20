@@ -1,6 +1,8 @@
 <?php
 namespace Blog\Repository\Post;
 
+use Blog\Post;
+
 class InMemoryRepository implements PostRepository
 {
     private $data = array();
@@ -17,7 +19,7 @@ class InMemoryRepository implements PostRepository
         return null;
     }
 
-    public function save($post)
+    public function save(Post $post)
     {
         if ($post->getId() > 0) {
             $this->update($post);
